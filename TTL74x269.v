@@ -5,7 +5,7 @@
 //	 DATA_WIDTH - width of the counter (default 8).
 // Behavior:
 //	 - Synchronous parallel load when PE_n is asserted on rising clk.
-//	 - When enabled (CEP_n == 1 or CET_n == 1) the counter increments if U_D == 1, decrements if U_D == 0.
+//	 - When enabled (CEP_n == 0 AND CET_n == 0) the counter increments if U_D == 1, decrements if U_D == 0.
 
 module MC74F269 
 #(
