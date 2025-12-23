@@ -13,7 +13,7 @@ module TT74x461
 	parameter integer WIDTH = 8
 )
 (
-	input  wire CLK,					// rising-edge clock
+	input  wire clk,					// rising-edge clock
 	input  wire OE,						// not supported
 	input  wire [WIDTH-1:0] D,			// parallel data to load when PL_n is low
 	input  wire CI_n					// carry in
@@ -26,7 +26,7 @@ module TT74x461
 	reg [WIDTH-1:0] count;
 	
 	wire CLR_n;
-	assign CLR_n = (m1 || m0);
+	assign CLR_n = !m1 && !m0;
 	
 	wire PL; // synchronous parallel load
 	assign PL = m1 && !m0;
@@ -38,10 +38,10 @@ module TT74x461
 	assign next_count = count + {{(WIDTH-1){1'b0}}, ci};
 
 	// Sequential: asynchronous clear; synchronous parallel load or count on rising CLK.
-	always @(posedge CLK or negedge CLR_n)
+	always @(posedge clk)
 	begin
 		// design intent: immediate reset of all bits
-		if (CLR_n)
+		if (!CLR_n)
 			count <= {WIDTH{1'b0}};
 		else
 		// design intent: synchronous parallel load on PL_n low
