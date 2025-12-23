@@ -7,7 +7,7 @@
 //	 - Synchronous parallel load when PE_n is asserted on rising clk.
 //	 - When enabled (CEP_n == 0 AND CET_n == 0) the counter increments if U_D == 1, decrements if U_D == 0.
 
-module MC74F269 
+module TTL74x269 
 #(
 	parameter DATA_WIDTH = 8
 )
@@ -34,7 +34,7 @@ module MC74F269
 		if (en)
 		begin
 			// Update count depending on direction (Increment or decrement)
-			d <= d + {{(DATA_WIDTH-1){1'b0}}, U_D};
+			d <= d + {!U_D, {(DATA_WIDTH-2){1'b0}}, U_D};
 		end
 
 	assign Q = d;
