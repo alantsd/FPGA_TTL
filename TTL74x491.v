@@ -30,10 +30,10 @@ module TTL74x491
 	reg [DATA_WIDTH-1:0] count;
 
 	wire [DATA_WIDTH-1:0] next_count_up;
-	assign next_count_up = d + {DATA_WIDTH{1'b1}};
+	assign next_count_up = d + {{(DATA_WIDTH-1){1'b0}}, 1'b1};
 	
 	wire [DATA_WIDTH-1:0] next_count_dn;
-	assign next_count_dn = d - {DATA_WIDTH{1'b1}};
+	assign next_count_dn = d - {{(DATA_WIDTH-1){1'b0}}, 1'b1};
 
 	always @(posedge clk)
 		// Set all bits high
