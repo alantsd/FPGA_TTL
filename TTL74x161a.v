@@ -3,12 +3,12 @@
 // Purpose: RTL model of SN74LS161A (4-bit binary counter (mod-16), Asynchronous Reset)
 // Parameters:
 //	 WIDTH		- internal register width (default 4)
-//	 MODULUS	- counting modulus (default 10 for BCD decade)
+//	MAX_COUNT	- counting up to 15
 // Behavior:
-//	 - Asynchronous active-low master clear (rst_n) clears the counter immediately.
+//	 - Asynchronous active-low master clear (MR_n) clears the counter immediately.
 //	 - Synchronous parallel load when PE_n is asserted low on rising clock edge.
 //	 - Counts on rising clock when both CEP and CET are high and not loading.
-//	 - Terminal count (TC) asserted when count == MODULUS-1 and CET is true.
+//	 - Terminal count (TC) asserted when count == MAX_COUNT and CET is true.
 
 module TTL74x161a
 (
