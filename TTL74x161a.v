@@ -1,6 +1,6 @@
 // TTL74x161a.v
 // Author: Alan Sing Teik
-// Purpose: RTL model of SN74LS161A (4-bit synchronous binary counter (mod-16))
+// Purpose: RTL model of SN74LS161A (4-bit binary counter (mod-16), Asynchronous Reset)
 // Parameters:
 //	 WIDTH		- internal register width (default 4)
 //	 MODULUS	- counting modulus (default 10 for BCD decade)
