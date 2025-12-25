@@ -9,3 +9,6 @@ full list of chip on wiki:
 https://en.wikipedia.org/wiki/List_of_7400-series_integrated_circuits
 
 This project aim to implement each module sorted on popularity of the IC.
+
+contact:
+https://my.linkedin.com/in/alan-sing-teik-440bb8a2
