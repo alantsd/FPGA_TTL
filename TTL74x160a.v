@@ -21,8 +21,8 @@ module TTL74x160a
 	output wire [WIDTH-1:0]	Q,		// current count
 	output wire				TC		// terminal count
 );
-	localparam [7:0] WIDTH	= 4;
-	localparam [WIDTH-1:0] MODULUS	= 10;
+	localparam WIDTH		= 4;
+	localparam [WIDTH-1:0] MAX_COUNT	= 9;
 
 	reg [WIDTH-1:0] d;
 
@@ -49,7 +49,7 @@ module TTL74x160a
 		if (CEP && CET && PE_n)
 		begin
 			// Increment with modulus wrap-around
-			if (d == (MODULUS - 1))
+			if (d == MAX_COUNT)
 				d <= {WIDTH{1'b0}};
 			else
 			if (error)
@@ -58,7 +58,7 @@ module TTL74x160a
 				d <= d_next;
 		end
 
-	assign TC = (d == (MODULUS - 1)) && CET;
+	assign TC = (d == MAX_COUNT) && CET;
 
 	assign Q = d[WIDTH-1:0];
 
