@@ -1,6 +1,6 @@
 // TTL74x74a.v
 // Purpose: RTL model SN74LS74A (Dual D flip-flops, positive-edge-triggered, asynchronous active-low preset and clear)
-
+// Author: Alan Sing Teik
 // Notes:
 //	 - PRE_n and CLR_n are asynchronous and have priority over the clocked update.
 //	 - Simultaneous PRE_n=0 and CLR_n=0 is undefined for the real device; this RTL
