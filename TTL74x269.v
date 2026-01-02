@@ -23,8 +23,8 @@ module TTL74x269
 );
 	reg [DATA_WIDTH-1:0] d;
 
-	wire en;
-	assign en = PE_n && (!CEP_n && !CET_n);
+	wire en_n;
+	assign en_n = (!CEP_n && !CET_n);
 
 	wire [DATA_WIDTH-1:0] next_d_up;
 	assign next_d_up = d + {{(DATA_WIDTH-1){1'b0}}, 1'b1};
@@ -37,14 +37,12 @@ module TTL74x269
 		if (!PE_n)
 			d <= P;
 		else
-		if (en)
-		begin
+			if (!en_n)
 			// Update count depending on direction (Increment or decrement)
 			if(U_D)
 				d <= next_d_up;
 			else
 				d <= next_d_dn;
-		end
 
 	assign Q = d;
 	
