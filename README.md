@@ -1,3 +1,4 @@
+![Logo](banner.jfif)
 # FPGA_TTL
 
 In the mid-1960s, the original 7400-series integrated circuits were introduced by Texas Instruments with the prefix "SN" to create the name SN74xx. 
@@ -14,4 +15,4 @@ Request for missing module.
 contact:
 https://my.linkedin.com/in/alan-sing-teik-440bb8a2
 
-Project memeber, pull request is welcomed
+Project member, pull request is welcomed
