@@ -15,43 +15,39 @@ module TT74x461
 (
 	input  wire clk,					// rising-edge clock
 	input  wire OE,						// not supported
-	input  wire [WIDTH-1:0] D,			// parallel data to load when PL_n is low
+	input  wire I0,						// mode[0]
+	input  wire I1,						// mode[1]
+	input  wire [WIDTH-1:0] D,			// parallel data to load when PL is high
 	input  wire CI_n					// carry in
 	output wire [WIDTH-1:0] Q,			// parallel count outputs
 	output wire CO_n					// ripple carry (low when count == MAX)
 );
 	localparam [WIDTH-1:0] MAX_COUNT = {WIDTH{1'b1}};
 
-	// Internal register
-	reg [WIDTH-1:0] count;
-	
-	wire CLR_n;
-	assign CLR_n = !m1 && !m0;
-	
-	wire PL; // synchronous parallel load
-	assign PL = m1 && !m0;
+	wire CLR;
+	assign CLR = !I1 && !I0;
+
+	wire PL;
+	assign PL = I1 && !I0;
 
 	wire ci;
-	assign ci = !CI_n && (m1 && m0);
-	
+	assign ci = !CI_n && (I1 && I0);
+
+	reg [WIDTH-1:0] count;
+
 	wire [WIDTH-1:0] next_count;
 	assign next_count = count + {{(WIDTH-1){1'b0}}, ci};
 
-	// Sequential: asynchronous clear; synchronous parallel load or count on rising CLK.
 	always @(posedge clk)
-	begin
-		// design intent: immediate reset of all bits
-		if (!CLR_n)
+		// design intent: synchronous clear
+		if (CLR)
 			count <= {WIDTH{1'b0}};
 		else
-		// design intent: synchronous parallel load on PL_n low
+		// design intent: synchronous parallel load
 		if (PL)
 			count <= D;
 		else
-		// design intent: increment by CI
 			count <= next_count;
-		// else retain current count when not enabled
-	end
 
 	assign Q = count;
 	// design intent: indicate terminal count for cascading
