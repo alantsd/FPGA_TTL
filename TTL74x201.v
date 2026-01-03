@@ -10,7 +10,7 @@
 //	 - Read:  when select_n low and R_W high, Q_n drives compliment of stored value
 //	 - Tri-state: when OE=1 or CE=1, data_out is high-Z (not supported)
 //------------------------------------------------------------
-module TTL74x201 
+module TTL74x201
 #(
 	parameter ADDR_WIDTH = 8,
 	parameter DATA_WIDTH = 1
@@ -30,15 +30,17 @@ module TTL74x201
 
 	reg [DATA_WIDTH-1:0] mem [0:(1<<ADDR_WIDTH)-1];
 
+	// Write operation
 	always @(posedge clk)
 		if(!select_n && !R_W)
-			mem[A] <= D; // Write operation
+			mem[A] <= D; 
 
 	reg [DATA_WIDTH-1:0] out;
 
+	// Read operation
 	always @(posedge clk)
 		if(!select_n && R_W)
-			out <= ~mem[A]; // Read operation
+			out <= ~mem[A]; 
 
 	// no support for tri-state output, always read 
 	assign Q_n = out;
