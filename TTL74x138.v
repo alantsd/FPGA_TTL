@@ -1,12 +1,14 @@
-// TTL74x138 3-to-8 decoder
-// Purpose: Behavioral, Parameterized model of SN74LS138 (3 to 8 decoder, active-low output)
+// TTL74x138.v
+// Author: Alan Sing Teik 
+// Purpose: RTL model of SN74LS138 (3-to-8 decoder, active-low output)
 // Parameters:
 //	 INPUT_WIDTH  : width of select inputs (default 3)
 //	 OUTPUT_WIDTH : number of outputs (default 8)
 // Behavior:
 //	 - G1 is active-high enable.
 //	 - G2A and G2B are active-low enables.
-//	 - Outputs Y[7:0] are active-low (selected output driven low when enabled).
+//	 - Outputs Y[7:0] are active-low (selected output driven low when enabled)
+
 module TTL74x138
 #(
 	parameter WIDTH = 8
