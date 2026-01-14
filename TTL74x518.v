@@ -10,16 +10,16 @@ module cmpN_comb
 	parameter WIDTH = 8
 )
 (
-	input  wire [WIDTH-1:0]	A,		// operand A
-	input  wire [WIDTH-1:0]	B,		// operand B
+	input  wire [WIDTH-1:0]	P,		// operand A
+	input  wire [WIDTH-1:0]	Q,		// operand B
 	input  wire				G_n,	// enable active low
- 	output wire				P		// true when A == B
+ 	output wire				EQ		// true when A == B
 );
 
 	wire [WIDTH-1:0] diff;
-	assign diff = (A ^ B);			// true if any bit differ
+	assign diff = (P ^ Q);	
 
-	assign P = &(~diff) & ~G_n;
+	assign EQ = &(~diff) & ~G_n;
 
 endmodule
 
