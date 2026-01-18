@@ -5,7 +5,7 @@
 //	 WIDTH			- Number of data inputs (default = 8)
 //	 SEL_WIDTH		- Number of select lines, automatically computed as
 //					  $clog2(WIDTH)
-
+// notes: likely uses 1x LUT4, 1x INV
 module TTL74x151
 #(
 	parameter WIDTH = 8,
@@ -29,3 +29,4 @@ module TTL74x151
 	assign W = ~out;
 
 endmodule
+
