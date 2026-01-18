@@ -9,7 +9,8 @@
 
 module TTL74x153
 #(
-    parameter WIDTH = 4
+    parameter WIDTH = 4,
+	parameter SEL_WIDTH = $clog2(WIDTH)
 )
 (
 	input  wire [SEL_WIDTH-1:0] A_B,	// select inputs for both MUX
@@ -20,7 +21,6 @@ module TTL74x153
 	output wire	Y1,						// Output of MUX A
 	output wire	Y2						// Output of MUX B
 );
-	localparam SEL_WIDTH = $clog2(WIDTH);
 
 	reg out1;
 	always@(*)
