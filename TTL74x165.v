@@ -8,6 +8,8 @@
 //	 - When SH_LD is high, on rising CLK edges the register shifts toward MSB and SER is shifted in.
 //	 - A clock-inhibit input (CLK_INH) prevents data change when asserted.
 //     implemented as gating the data, instead of true clock gating
+// notes: 74x165's parallel load feature prevents SRL inference. 
+// It will synthesize to regular flip-flops with multiplexers
 
 module TTL74x165
 #(
@@ -30,6 +32,7 @@ module TTL74x165
 	always @(posedge clk or negedge SH_LD)
 		if (!SH_LD)
 			d <= A;
+		else
 		if (!CLK_INH)
 			d <= d_next;
 
