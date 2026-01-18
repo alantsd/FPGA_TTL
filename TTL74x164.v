@@ -7,6 +7,7 @@
 //	 - Serial data enters on rising edge of clk when both A and B are high (gated inputs).
 //	 - Asynchronous active-low clear (CLR_n) clears all stages immediately.
 //	 - Outputs present the parallel contents of the shift register.
+// notes: 74x164's async clear feature prevents SRL inference. It will synthesize to regular flip-flops
 
 module TTL74x164
 #(
@@ -25,7 +26,7 @@ module TTL74x164
 
 	reg [WIDTH-1:0] d;
 
-	always @(posedge CLK or negedge CLR_n)
+	always @(posedge clk or negedge CLR_n)
 	begin
 		// design intent: asynchronous clear resets all stages
 		if (!CLR_n)
