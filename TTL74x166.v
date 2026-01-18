@@ -8,6 +8,7 @@
 //	 - When SH_LD is high, on rising CLK edges the register shifts toward MSB and SER is shifted in.
 //	 - A clock-inhibit input (CLK_INH) prevents data change when asserted.
 //     implemented as gating the data, instead of true clock gating
+// Notes: 74x166's async clear feature prevents SRL inference. It will synthesize to regular flip-flops
 
 module TTL74x166
 #(
@@ -40,3 +41,4 @@ module TTL74x166
 	assign QH = d[WIDTH-1];
 
 endmodule
+
